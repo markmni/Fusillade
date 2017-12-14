@@ -149,6 +149,7 @@ namespace Fusillade
                 request.Headers.AcceptEncoding.ConcatenateAll(x => x.Value),
                 (request.Headers.Referrer ?? new Uri("http://example")).AbsoluteUri,
                 request.Headers.UserAgent.ConcatenateAll(x => (x.Product != null ? x.Product.ToString() : x.Comment)),
+                request.Headers.IfModifiedSince?.ToString()
             }.Aggregate(new StringBuilder(), (acc, x) => { acc.AppendLine(x); return acc; });
 
             if (request.Headers.Authorization != null) {
